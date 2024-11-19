@@ -1,15 +1,42 @@
 {{ block "index" . }}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Go + HTMX App</title>
+    <title>Canvas Wars</title>
     <script src="https://unpkg.com/htmx.org@1.9.10"></script>
     <link href="/static/css/styles.css" rel="stylesheet">
 </head>
+
 <body>
-    <h1>Welcome to Go + HTMX App</h1>
+    <h1>Canvas wars</h1>
+    <div id="pixelCanvas"></div>
+    <script>
+        const canvas = document.getElementById('pixelCanvas');
+
+        // Generate random color
+        function getRandomColor() {
+            const letters = '0123456789ABCDEF';
+            let color = '#';
+            for (let i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+
+        // Create 100x100 grid
+        for (let i = 0; i < 10000; i++) {
+            const pixel = document.createElement('div');
+            pixel.className = 'pixel';
+            pixel.style.backgroundColor = getRandomColor();
+            canvas.appendChild(pixel);
+        }
+    </script>
 </body>
+
+</html>
+
 </html>
 {{ end }}
