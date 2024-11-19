@@ -33,6 +33,11 @@
             pixel.style.backgroundColor = getRandomColor();
             canvas.appendChild(pixel);
         }
+
+        canvas.addEventListener("click", (e) => {
+            console.log(e.x);
+            console.log(e.y);
+        })
     </script>
 </body>
 
