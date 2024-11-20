@@ -34,5 +34,9 @@ func main() {
 		return c.Render(http.StatusOK, "index", nil)
 	})
 
+	e.GET("/data", func(c echo.Context) error {
+		return c.String(http.StatusOK, "Hello, World!")
+	})
+
 	e.Logger.Fatal(e.Start(":8080"))
 }
