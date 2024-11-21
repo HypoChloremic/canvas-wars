@@ -2,7 +2,7 @@ body {
     background: white;
 }
 
-#pixelCanvas {
+/* #pixelCanvas {
     display: grid;
     grid-template-columns: repeat(100, 5px);
     grid-template-rows: repeat(100, 5px);
@@ -10,7 +10,7 @@ body {
     background: #eee;
     padding: 10px;
     width: fit-content;
-}
+} */
 
 .pixel {
     width: 5px;
