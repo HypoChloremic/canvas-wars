@@ -12,7 +12,7 @@
 
 <body>
     <h1>Canvas wars</h1>
-    <div id="pixelCanvas"></div>
+    <canvas id="pixelCanvas" width="100" height="100"></canvas>
     <script>
         const canvas = document.getElementById('pixelCanvas');
 
@@ -26,23 +26,27 @@
             return color;
         }
 
-        // Create 100x100 grid
-        for (let i = 0; i < 10000; i++) {
-            const pixel = document.createElement('div');
-            pixel.className = 'pixel';
-            pixel.style.backgroundColor = getRandomColor();
-            canvas.appendChild(pixel);
+        canvas.style.backgroundColor = "#eee";
+        const boundingRect = canvas.getBoundingClientRect();
+        const canvasCtx = canvas.getContext("2d");
+        // canvasCtx.scale(10, 10); Bronked
+        canvasCtx.fillStyle = getRandomColor();
+
+        function paintRandomColorInPixel(event) {
+            const x = event.x - boundingRect.left;
+            const y = event.y - boundingRect.top;
+            canvasCtx.fillRect(x, y, 1, 1);
+            canvasCtx.fillStyle = getRandomColor();
         }
 
         canvas.addEventListener("click", (e) => {
             console.log("x: " + e.x);
             console.log("y: " + e.y);
-            e.target.style.backgroundColor = "white"
+
+            paintRandomColorInPixel(e);
         })
     </script>
 </body>
-
-</html>
 
 </html>
 {{ end }}
