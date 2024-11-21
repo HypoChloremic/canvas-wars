@@ -35,8 +35,9 @@
         }
 
         canvas.addEventListener("click", (e) => {
-            console.log(e.x);
-            console.log(e.y);
+            console.log("x: " + e.x);
+            console.log("y: " + e.y);
+            e.target.style.backgroundColor = "white"
         })
     </script>
 </body>
