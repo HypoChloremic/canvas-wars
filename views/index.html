@@ -27,16 +27,31 @@
         }
 
         // Create 100x100 grid
-        for (let i = 0; i < 10000; i++) {
+        for (let i = 0; i < 100; i++) {
             const pixel = document.createElement('div');
             pixel.className = 'pixel';
             pixel.style.backgroundColor = getRandomColor();
             canvas.appendChild(pixel);
+            pixel.addEventListener("click", (e) => {
+                pixel.style.backgroundColor = getRandomColor();
+            })
         }
 
         canvas.addEventListener("click", (e) => {
             console.log(e.x);
             console.log(e.y);
+        })
+        async function getData() {
+            const resp = fetch(
+                "/data"
+            );
+            const body = await resp.json();
+            return body;
+        }
+        document.addEventListener("DOMContentLoaded", async (e) => {
+            const body = await fetch("/data");
+            console.log(body);
+            console.log(body);
         })
     </script>
 </body>

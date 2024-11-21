@@ -1,11 +1,14 @@
 package main
 
 import (
-	"github.com/labstack/echo/v4"
-	"github.com/labstack/echo/v4/middleware"
+	"fmt"
 	"html/template"
 	"io"
+	"math/rand"
 	"net/http"
+
+	"github.com/labstack/echo/v4"
+	"github.com/labstack/echo/v4/middleware"
 )
 
 type Templates struct {
@@ -22,6 +25,11 @@ func NewTemplates() *Templates {
 	}
 }
 
+type data struct {
+	color uint8
+	pos   uint8
+}
+
 func main() {
 	e := echo.New()
 	e.Use(middleware.Logger())
@@ -34,8 +42,14 @@ func main() {
 		return c.Render(http.StatusOK, "index", nil)
 	})
 
+	list := make([]data, 100)
+	for i := uint8(0); i < 100; i++ {
+		list[i].color = uint8(rand.Intn(4))
+		list[i].pos = i
+	}
+	message := fmt.Sprintf("%v", list)
 	e.GET("/data", func(c echo.Context) error {
-		return c.String(http.StatusOK, "Hello, World!")
+		return c.String(http.StatusOK, message)
 	})
 
 	e.Logger.Fatal(e.Start(":8080"))
