@@ -12,3 +12,5 @@ go version go1.23.3 linux/amd64
 https://bucephalus.org/text/CanvasHandbook/CanvasHandbook.html
 https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API
 https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Pixel_manipulation_with_canvas
+
+
