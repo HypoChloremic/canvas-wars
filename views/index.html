@@ -11,10 +11,30 @@
 </head>
 
 <body>
-    <h1>Canvas wars</h1>
-    <canvas id="pixelCanvas" width="100" height="100"></canvas>
+    <div style="display:flex; flex-direction:row">
+        <div>
+            <canvas id="pixelCanvas" width="500" height="500"></canvas>
+        </div>
+        <div style="display:flex; flex-direction:column; margin-left:10px;">
+            <form style="display:flex; flex-direction: column;">
+                <label for="xCord">x-kord</label>
+                <input id="xCord" name="xCord" type="text" value="0" disabled />
+
+                <label for="yCord">y-kord</label>
+                <input id="yCord" name="yCord" type="text" value="0" disabled />
+            </form>
+        </div>
+    </div>
     <script>
-        const canvas = document.getElementById('pixelCanvas');
+        const canvas = document.getElementById("pixelCanvas");
+        const xCord = document.getElementById("xCord");
+        const yCord = document.getElementById("yCord");
+
+        const SQUARE_WIDTH = 10;
+        const SQUARE_HEIGHT = 10;
+
+        const TOTAL_WIDTH = 500;
+        const TOTAL_HEIGHT = 500;
 
         // Generate random color
         function getRandomColor() {
@@ -29,7 +49,6 @@
         canvas.style.backgroundColor = "#eee";
         const boundingRect = canvas.getBoundingClientRect();
         const canvasCtx = canvas.getContext("2d");
-        // canvasCtx.scale(10, 10); Bronked
         canvasCtx.fillStyle = getRandomColor();
 
         function paintRandomColorInPixel(event) {
@@ -39,12 +58,44 @@
             canvasCtx.fillStyle = getRandomColor();
         }
 
+        function paintLines() {
+            for (let i = 0; i < TOTAL_WIDTH; i += SQUARE_WIDTH) {
+                for (let j = 0; j < TOTAL_HEIGHT; j += SQUARE_HEIGHT) {
+                    canvasCtx.fillRect(i, j, SQUARE_HEIGHT, SQUARE_WIDTH)
+                    canvasCtx.fillStyle = getRandomColor();
+                }
+            }
+        }
+
+        function paintSquares() {
+            for (let i = 0; i < TOTAL_WIDTH; i += SQUARE_WIDTH) {
+                for (let j = 0; j < TOTAL_HEIGHT; j += SQUARE_HEIGHT) {
+                    canvasCtx.fillRect(i, j, SQUARE_HEIGHT, SQUARE_WIDTH)
+                    canvasCtx.fillStyle = getRandomColor();
+                }
+            }
+        }
+
+        function paintSquare(xSquare, ySquare) {
+            canvasCtx.fillRect(xSquare * 10, ySquare * 10, SQUARE_HEIGHT, SQUARE_WIDTH);
+            canvasCtx.fillStyle = getRandomColor();
+        }
+
         canvas.addEventListener("click", (e) => {
             console.log("x: " + e.x);
             console.log("y: " + e.y);
 
+            xCord.value = e.x;
+            yCord.value = e.y;
+
+            const xSquare = parseInt(e.x / SQUARE_WIDTH);
+            const ySquare = parseInt(e.y / SQUARE_HEIGHT);
+
             paintRandomColorInPixel(e);
+            paintSquare(xSquare, ySquare);
         })
+
+        // paintSquares();
     </script>
 </body>
 
